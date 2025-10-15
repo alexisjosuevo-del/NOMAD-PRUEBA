@@ -345,6 +345,7 @@ document.getElementById('medico').addEventListener('change',e=>setKAMAndPhoneFro
 
 
 // --- Integración de PDF con WhatsApp y contador de descargas ---
+// Nota: requiere que tengas una variable global `currentUser` asignada cuando el login es exitoso.
 function descargarPDF() {
   const element = document.getElementById('cotizador');
   const opt = {
@@ -364,8 +365,10 @@ function descargarPDF() {
   // Generar PDF
   html2pdf().set(opt).from(element).save();
 
-  // Registrar descarga en Google Sheets
-  fetch("https://script.google.com/macros/s/AKfycbxT9AQpFe6_errqhEzkeyGRL_CR6fzurHn6LQvMl2AW6j_1BLKqzVWbSYq9CcYl9dmxFA/exec")
+  // Registrar descarga en Google Sheets con usuario
+  let usuario = (typeof currentUser !== "undefined" && currentUser) ? currentUser : "desconocido";
+
+  fetch("https://script.google.com/macros/s/AKfycbxT9AQpFe6_errqhEzkeyGRL_CR6fzurHn6LQvMl2AW6j_1BLKqzVWbSYq9CcYl9dmxFA/exec?usuario=" + encodeURIComponent(usuario))
     .then(response => {
       if (!response.ok) {
         throw new Error("Fallo al registrar descarga");

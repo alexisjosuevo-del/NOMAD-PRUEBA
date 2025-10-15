@@ -229,5 +229,38 @@
 
   <script src="app.js"></script>
 <div class="footer-code">NOG-KAM-FOR-01</div>
+
+<!-- Overlay de Login -->
+<div id="overlay" style="
+  position: fixed;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;">
+  <div style="background: #fff; padding: 2rem; border-radius: 10px; width: 300px; text-align: center;">
+    <h2>Acceso</h2>
+    <input id="user" type="text" placeholder="Usuario" style="display:block; margin:10px auto; width:90%; padding:8px;" />
+    <input id="pass" type="password" placeholder="Contraseña" style="display:block; margin:10px auto; width:90%; padding:8px;" />
+    <button onclick="checkLogin()" style="margin-top:10px; padding:10px 20px; background:#0070f3; color:#fff; border:none; border-radius:5px; cursor:pointer;">Entrar</button>
+  </div>
+</div>
+
+<script>
+  const USER = "nomad";
+  const PASS = "admin";
+
+  function checkLogin() {
+    const u = document.getElementById("user").value;
+    const p = document.getElementById("pass").value;
+    if (u === USER && p === PASS) {
+      document.getElementById("overlay").style.display = "none";
+    } else {
+      alert("Usuario o contraseña incorrectos");
+    }
+  }
+</script>
+
 </body>
 </html>
